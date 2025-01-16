@@ -1,18 +1,19 @@
+// src/Components/LoginSignup/Login.jsx
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../config/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, setPersistence, browserLocalPersistence, browserSessionPersistence } from 'firebase/auth';
 
-const Signup = () => {
+const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const navigate = useNavigate();
 
   const handleFormSubmit = async (e) => {
@@ -29,43 +30,48 @@ const Signup = () => {
       setError('Password must be at least 6 characters long.');
       return;
     }
-    if (password !== confirmPassword) {
-      setError('Passwords do not match.');
-      return;
-    }
 
     setLoading(true);
 
     try {
-      // Create user in Firebase Authentication
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      const user = userCredential.user;
+      // Set persistence based on remember me
+      await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
+      
+      // Sign in with Firebase
+      await signInWithEmailAndPassword(auth, email, password);
+      
+      setSuccess('Login successful!');
 
-      setSuccess('Signup successful! You can now log in.');
-      setEmail('');
-      setPassword('');
-      setConfirmPassword('');
+      // Store user info in localStorage if remember me is checked
+      if (rememberMe) {
+        localStorage.setItem('userEmail', email);
+      } else {
+        localStorage.removeItem('userEmail');
+      }
 
       // Navigate to dashboard
       navigate('/dashboard', { replace: true });
 
     } catch (error) {
-      console.error('Signup error:', error);
+      console.error('Login error:', error);
       switch (error.code) {
-        case 'auth/email-already-in-use':
-          setError('This email is already registered.');
+        case 'auth/user-not-found':
+          setError('No account found with this email.');
+          break;
+        case 'auth/wrong-password':
+          setError('Incorrect password.');
           break;
         case 'auth/invalid-email':
           setError('Invalid email address.');
           break;
-        case 'auth/operation-not-allowed':
-          setError('Email/password accounts are not enabled.');
+        case 'auth/user-disabled':
+          setError('This account has been disabled.');
           break;
-        case 'auth/weak-password':
-          setError('Password is too weak. Please use at least 6 characters.');
+        case 'auth/too-many-requests':
+          setError('Too many failed attempts. Please try again later.');
           break;
         default:
-          setError('Failed to create account. Please try again.');
+          setError('Failed to login. Please try again.');
       }
     } finally {
       setLoading(false);
@@ -80,11 +86,11 @@ const Signup = () => {
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
-        <h2 className="text-2xl font-medium text-center mb-6">Create an account ✨</h2>
-
+        <h2 className="text-2xl font-medium text-center mb-6">Log in to your account 🔐</h2>
+        
         {error && <div className="text-red-500 text-center mb-4">{error}</div>}
         {success && <div className="text-green-500 text-center mb-4">{success}</div>}
-
+        
         <form onSubmit={handleFormSubmit}>
           <div className="mb-4">
             <label className="block text-gray-700">Email</label>
@@ -111,19 +117,27 @@ const Signup = () => {
                 onClick={() => setShowPassword(!showPassword)}
                 className="absolute right-2 top-2 text-gray-500"
               >
-                {showPassword ? <HiEyeOff className="w-5 h-5" /> : <HiEye className="w-5 h-5" />}
+                {showPassword ? <HiEyeOff className="h-5 w-5" /> : <HiEye className="h-5 w-5" />}
               </button>
             </div>
           </div>
-          <div className="mb-4">
-            <label className="block text-gray-700">Confirm Password</label>
-            <input
-              type="password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              className="mt-1 block w-full border border-gray-300 rounded-md p-2"
-            />
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                checked={rememberMe}
+                onChange={() => setRememberMe(!rememberMe)}
+                className="mr-2"
+              />
+              <label className="text-gray-700">Remember Me</label>
+            </div>
+            <button
+              type="button"
+              onClick={() => navigate('/forgot-password')}
+              className="text-purple-600 hover:text-purple-500"
+            >
+              Forgot Password?
+            </button>
           </div>
           <div className="flex justify-center">
             <button
@@ -131,17 +145,17 @@ const Signup = () => {
               className={`bg-purple-600 text-white rounded-md py-2 px-4 hover:bg-purple-400 transition duration-200 ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
               disabled={loading}
             >
-              {loading ? 'Signing up...' : 'Sign Up'}
+              {loading ? 'Logging In...' : 'Login'}
             </button>
           </div>
         </form>
         <div className="text-center mt-4">
-          <span className="text-gray-600">Already have an account? </span>
+          <span className="text-gray-600">Don't have an account? </span>
           <button
-            onClick={() => navigate('/login')}
+            onClick={() => navigate('/signup')}
             className="text-purple-600 hover:text-purple-500"
           >
-            Log in
+            Sign up
           </button>
         </div>
       </motion.div>
@@ -149,4 +163,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Login;
