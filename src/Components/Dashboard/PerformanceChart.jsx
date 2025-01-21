@@ -18,7 +18,7 @@ export default function PerformanceChart() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Fetch data logic here
+       
       } finally {
         setLoading(false);
       }
@@ -33,20 +33,19 @@ export default function PerformanceChart() {
       </h2>
       <ResponsiveContainer width="100%" height={400}>
         <BarChart data={data}>
-          {/* Grid styling */}
+         
           <CartesianGrid strokeDasharray="3 3" stroke="#e0e0e0" />
           
-          {/* Axes */}
           <XAxis dataKey="name" stroke="#333" tick={{ fontSize: 12 }} />
           <YAxis stroke="#333" tick={{ fontSize: 12 }} />
           
-          {/* Tooltip */}
+        
           <Tooltip cursor={{ fill: '#f5f5f5' }} />
           
-          {/* Legend */}
+      
           <Legend wrapperStyle={{ fontSize: 14, marginTop: 10 }} />
           
-          {/* Bar styling with animations */}
+      
           <Bar 
             dataKey="value" 
             fill="#4CAF50" 

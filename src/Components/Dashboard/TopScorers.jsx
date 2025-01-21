@@ -17,7 +17,7 @@ export default function TopScorers() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        // Fetch data logic here
+        
       } finally {
         setLoading(false);
       }

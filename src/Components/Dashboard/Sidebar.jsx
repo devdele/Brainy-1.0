@@ -68,7 +68,7 @@ export default function Sidebar() {
 
   return (
     <>
-      {/* Hamburger Menu Button */}
+    
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-4 left-4 z-50 p-2 rounded-lg bg-purple-900 text-white hover:bg-purple-800 transition-colors"
@@ -76,7 +76,7 @@ export default function Sidebar() {
         {isOpen ? <X size={24} /> : <Menu size={24} />}
       </button>
 
-      {/* Overlay */}
+     
       <AnimatePresence>
         {isMobile && isOpen && (
           <motion.div
@@ -90,7 +90,7 @@ export default function Sidebar() {
         )}
       </AnimatePresence>
 
-      {/* Sidebar */}
+   
       <motion.div
         initial={isMobile ? "closed" : "open"}
         animate={isMobile ? (isOpen ? "open" : "closed") : "open"}

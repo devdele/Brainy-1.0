@@ -28,13 +28,13 @@ export default function Dashboard() {
     <div className="flex flex-col lg:flex-row min-h-screen bg-gray-50">
       <Sidebar />
       <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        {/* Header Section */}
+   
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 sm:gap-6 mb-6 sm:mb-8">
           <h1 className="text-xl sm:text-2xl font-semibold ml-[50px] mt-[10px]">Welcome to Brainy</h1>
 
-          {/* Search and Actions Container */}
+        
           <div className="w-full sm:w-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-4 sm:gap-6">
-            {/* Search Bar */}
+         
             <div className="relative w-full sm:w-auto">
               <input
                 type="search"
@@ -44,7 +44,7 @@ export default function Dashboard() {
               />
             </div>
 
-            {/* Action Buttons */}
+           
             <div className="flex items-center justify-end gap-2">
               <button
                 className="p-2 rounded-full bg-white hover:bg-gray-200 transition-all duration-300 transform hover:scale-110"
@@ -68,12 +68,12 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Stats Overview Section */}
+       
         <div className="mb-8">
           <StatsOverview />
         </div>
 
-        {/* Charts Grid Section */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 mb-8">
           <Card className="p-4 sm:p-6">
             <Calendar />
@@ -83,7 +83,7 @@ export default function Dashboard() {
           </Card>
         </div>
 
-        {/* Top Scorers Section */}
+     
         <div className="mb-8">
           <TopScorers />
         </div>

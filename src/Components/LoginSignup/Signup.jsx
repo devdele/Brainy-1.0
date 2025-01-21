@@ -21,7 +21,7 @@ const Signup = () => {
     setError('');
     setSuccess('');
 
-    // Basic validation
+    
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError('Please enter a valid email address.');
       return;
@@ -38,15 +38,15 @@ const Signup = () => {
     setLoading(true);
 
     try {
-      // Create user in Firebase Authentication
+      
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
 
-      // Store additional user data in Firestore
+      
       await setDoc(doc(db, 'users', user.uid), {
         email: user.email,
         createdAt: new Date().toISOString(),
-        // Add any additional user data fields here
+       
       });
 
       setSuccess('Signup successful! You can now log in.');
@@ -54,7 +54,7 @@ const Signup = () => {
       setPassword('');
       setConfirmPassword('');
 
-      // Navigate to dashboard
+      
       navigate('/dashboard', { replace: true });
 
     } catch (error) {
