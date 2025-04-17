@@ -64,7 +64,7 @@ const Header = () => {
           </a>
         </div>
         <div className="hidden md:flex space-x-2">
-    
+
         <Link to="/login">
           <motion.button
             className="bg-purple-800 text-white py-3 px-6 rounded-lg flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-shadow"
