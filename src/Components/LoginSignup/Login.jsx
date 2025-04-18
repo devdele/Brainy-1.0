@@ -1,4 +1,4 @@
-// src/Components/LoginSignup/Login.jsx
+
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { HiEye, HiEyeOff } from 'react-icons/hi';
@@ -21,7 +21,6 @@ const Login = () => {
     setError('');
     setSuccess('');
 
-    // Basic validation
     if (!/\S+@\S+\.\S+/.test(email)) {
       setError('Please enter a valid email address.');
       return;
@@ -34,22 +33,22 @@ const Login = () => {
     setLoading(true);
 
     try {
-      // Set persistence based on remember me
+     
       await setPersistence(auth, rememberMe ? browserLocalPersistence : browserSessionPersistence);
       
-      // Sign in with Firebase
+     
       await signInWithEmailAndPassword(auth, email, password);
       
       setSuccess('Login successful!');
 
-      // Store user info in localStorage if remember me is checked
+     
       if (rememberMe) {
         localStorage.setItem('userEmail', email);
       } else {
         localStorage.removeItem('userEmail');
       }
 
-      // Navigate to dashboard
+      
       navigate('/dashboard', { replace: true });
 
     } catch (error) {

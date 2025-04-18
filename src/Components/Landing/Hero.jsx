@@ -6,7 +6,6 @@ const Hero = () => {
   return (
     <div className="text-black py-20 md:py-40 text-center">
       <div className="container mx-auto flex flex-col-reverse md:flex-row justify-center items-center gap-12 md:gap-[8rem] px-6">
-        {/* Left Section */}
         <div className="flex flex-col justify-center items-center md:items-start gap-6 md:gap-8 text-center md:text-left">
           <h1 className="text-3xl md:text-5xl font-bold animate-fadeIn">
             Welcome to Brainy.
@@ -40,7 +39,7 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Right Section */}
+      
         <div className="hidden md:block animate-zoomIn">
           <img
             src={HeroImage}

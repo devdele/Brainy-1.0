@@ -81,6 +81,7 @@ export default function Sidebar() {
 
   return (
     <>
+
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="lg:hidden fixed top-6 left-6 z-50 p-2 rounded-full bg-gradient-to-r from-purple-700 to-indigo-800 text-white shadow-lg hover:shadow-purple-500/30 transition-all duration-300"
@@ -95,6 +96,7 @@ export default function Sidebar() {
         </motion.div>
       </button>
 
+
       <AnimatePresence>
         {isMobile && isOpen && (
           <motion.div
@@ -107,6 +109,7 @@ export default function Sidebar() {
           />
         )}
       </AnimatePresence>
+
 
       <motion.div
         initial={isMobile ? "closed" : "open"}
