@@ -32,7 +32,6 @@ export default function Sidebar() {
     { name: 'Dashboard', icon: Home, path: 'dashboard' },
     { name: 'Students', icon: Users, path: 'students' },
     { name: 'Teachers', icon: GraduationCap, path: 'teachers' },
-    { name: 'Attendance', icon: Calendar, path: 'attendance' },
     { name: 'Exam', icon: FileText, path: 'exam' },
     // { name: 'Account', icon: CreditCard, path: 'account' },
     { name: 'Settings', icon: Settings, path: 'settings' }
