@@ -8,7 +8,6 @@ import Dashboard from './Pages/Dashboard/Dash';
 import Students from './Components/Dashboard/Students/index.jsx';
 import Teachers from './Components/Dashboard/Teachers/index.jsx';
 import Exam from './Components/Dashboard/Exam/index.jsx';
-import Settings from './Components/Dashboard/Settings/index.jsx';
 import './index.css';
 
 const root = document.getElementById('root');
@@ -23,7 +22,7 @@ ReactDOM.createRoot(root).render(
       <Route path="/students" element={<Students />} />
       <Route path="/teachers" element={<Teachers />} />
       <Route path="/exam" element={<Exam />} />
-      <Route path="/settings" element={<Settings />} />
+
     </Routes>
   </BrowserRouter>
 );

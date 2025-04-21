@@ -597,15 +597,15 @@ const StudentsPage = () => {
                         </span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-  <label className="inline-flex items-center mr-4">
-    <input type="radio" name="approval" value="approve" className="form-radio text-green-600" />
-    <span className="ml-2">Approve</span>
-  </label>
-  <label className="inline-flex items-center">
-    <input type="radio" name="approval" value="cancel" className="form-radio text-red-600" />
-    <span className="ml-2">Cancel</span>
-  </label>
-</td>
+                <label className="inline-flex items-center mr-4">
+                   <input type="radio" name="approval" value="approve" className="form-radio text-green-600" />
+                      <span className="ml-2">Approve</span>
+                </label>
+                <label className="inline-flex items-center">
+            <input type="radio" name="approval" value="cancel" className="form-radio text-red-600" />
+             <span className="ml-2">Cancel</span>
+               </label>
+              </td>     
                     </tr>
                   ))
                 ) : (
@@ -619,7 +619,7 @@ const StudentsPage = () => {
             </table>
           </div>
           
-          {/* Pagination */}
+         
           <div className="bg-gray-50 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6 mt-auto">
             <div className="flex-1 flex justify-between sm:hidden">
               <button 

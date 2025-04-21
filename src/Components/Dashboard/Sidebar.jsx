@@ -1,7 +1,6 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { 
-  Home, Users, GraduationCap, UserPlus, BookOpen, 
-  Calendar, FileText, Building2, CreditCard, Settings, Menu, X 
+  Home, Users, GraduationCap,FileText, Settings, Menu, X 
 } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -10,8 +9,9 @@ export default function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   
-  // Extract the current path to determine active menu item
+ 
   const currentPath = location.pathname.split('/')[1] || 'dashboard';
 
   useEffect(() => {
@@ -33,8 +33,6 @@ export default function Sidebar() {
     { name: 'Students', icon: Users, path: 'students' },
     { name: 'Teachers', icon: GraduationCap, path: 'teachers' },
     { name: 'Exam', icon: FileText, path: 'exam' },
-    // { name: 'Account', icon: CreditCard, path: 'account' },
-    { name: 'Settings', icon: Settings, path: 'settings' }
   ];
 
   const sidebarVariants = {
@@ -77,6 +75,11 @@ export default function Sidebar() {
         ease: "easeInOut"
       }
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    navigate('/', { replace: true });
   };
 
   return (
@@ -131,7 +134,7 @@ export default function Sidebar() {
           </motion.div>
         </Link>
         
-        {/* Decorative element */}
+       
         <div className="absolute -right-8 top-24 w-24 h-24 bg-purple-500 opacity-20 rounded-full blur-xl"></div>
         <div className="absolute -left-10 top-64 w-28 h-28 bg-indigo-500 opacity-20 rounded-full blur-xl"></div>
         
@@ -173,14 +176,15 @@ export default function Sidebar() {
           <motion.div 
             className="p-4 bg-gradient-to-r from-purple-800/80 to-indigo-800/80 backdrop-blur-sm rounded-xl shadow-lg border border-white/10 transition-all duration-300 cursor-pointer"
             whileHover={{ y: -5, boxShadow: "0 15px 30px rgba(79, 70, 229, 0.2)" }}
+            onClick={handleLogout}
           >
             <div className="flex items-center">
               <div className="w-12 h-12 rounded-full bg-gradient-to-br from-purple-500 to-indigo-500 flex items-center justify-center ring-2 ring-white/20">
                 <span className="text-lg font-semibold">AT</span>
               </div>
               <div className="ml-4">
-                <p className="font-medium text-white">Ayodele Toluwani</p>
-                <p className="text-sm text-purple-200 opacity-80">Owner</p>
+                <p className="text-sm text-purple-200">Admin</p>
+                <p className="font-medium text-white">Logout</p>
               </div>
               <motion.div 
                 className="ml-auto text-purple-200 hover:text-white"
