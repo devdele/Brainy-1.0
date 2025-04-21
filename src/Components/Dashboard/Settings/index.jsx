@@ -2,7 +2,7 @@ import React from 'react'
 
 const index = () => {
   return (
-    <div>index</div>
+    <div className='text-2xl'>404 page not found</div>
   )
 }
 
