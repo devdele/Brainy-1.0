@@ -8,7 +8,7 @@
   </a>
 </p>
 
-> This was inspired by looking at how schools don't have a learning management systems.
+> A modern learning management system designed to overcome the limitations of traditional educational platforms.
 
 ### 🏠 [Homepage](https://schoolbrainy.vercel.app/)
 
